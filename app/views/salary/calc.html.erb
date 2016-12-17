@@ -1,0 +1,30 @@
+税前收入<%= format_money(@amount) %>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>金额</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>养老保险</td>
+    <td><%= format_money(@pension) %></td>
+  </tr>
+  <tr>
+    <td>医疗保险</td>
+    <td><%= format_money(@medicare) %></td>
+  </tr>
+  <tr>
+    <td>失业保险</td>
+    <td><%= format_money(@unemployment) %></td>
+  </tr>
+  <tr>
+    <td>住房公积金</td>
+    <td><%= format_money(@house_fund) %></td>
+  </tr>
+  <tr>
+    <td>个人所得税</td>
+    <td><%= format_money(@tax) %></td>
+  </tr>
+</table>
+实际收入: <%= format_money(@income) %>
