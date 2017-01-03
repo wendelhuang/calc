@@ -1,0 +1,50 @@
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>数额</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>贷款金额</td>
+    <td><%= format_money(@amount) %></td>
+  </tr>
+  <tr>
+    <td>贷款利率</td>
+    <td><%= @rate %></td>
+  </tr>
+  <tr>
+    <td>贷款期限</td>
+    <td><%= @year %></td>
+  </tr>
+  <tr>
+    <td>贷款方式</td>
+    <td><%= @method=='1' ? '等额本金' : '等额本息'%></td>
+  </tr>
+</table>
+<hr/>
+<p>
+还款计划
+</p>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>期数</th>
+      <th>本期还款</th>
+      <th>本期还本金</th>
+      <th>本期还利息</th>
+      <th>已还本金</th>
+      <th>已还利息</th>
+    </tr>
+  </thead>
+  <% for i in 1..@repayment.length %>
+    <tr>
+      <td><%= @repayment[i-1][:term] %></td>
+      <td><%= format_money(@repayment[i-1][:principle]+@repayment[i-1][:interest]) %></td>
+      <td><%= format_money(@repayment[i-1][:principle]) %></td>
+      <td><%= format_money(@repayment[i-1][:interest]) %></td>
+      <td><%= format_money(@repayment[i-1][:principle_repaied]) %></td>
+      <td><%= format_money(@repayment[i-1][:interest_repaied]) %></td>
+    </tr>
+  <% end %>
+</table>

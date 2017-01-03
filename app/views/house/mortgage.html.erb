@@ -1,0 +1,55 @@
+<div style="margin:20px">
+  <%= form_tag({action: 'calc'}, method: 'get', class: 'form-horizontal', role: 'form') do %>
+    <div class='form-group'>
+      <%= label_tag 'amount', '贷款总额', for: 'amount', class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= text_field_tag 'amount', '', class: 'form-control', placeholder: '0.00', pattern: '^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$' %>
+      </div>
+    </div>
+    <div class='form-group'>
+      <%= label_tag 'rate', '贷款利率', for: 'rate', class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= text_field_tag 'rate', '4.90', class: 'form-control', placeholder: '0.00', pattern: '^([1-9][\d]{0,7}|0)(\.[\d]*)?$' %>
+      </div>
+      <div class="col-md-1">%</div>
+    </div>
+    <div class='form-group'>
+      <div class="col-md-offset-3">
+        <button type="button" class="btn btn-default" onclick="resetRate()">重置为基准利率</button>
+        <button type="button" class="btn btn-default" onclick="changeRate(0.83)">八三折</button>
+        <button type="button" class="btn btn-default" onclick="changeRate(0.85)">八五折</button>
+        <button type="button" class="btn btn-default" onclick="changeRate(0.88)">八八折</button>
+        <button type="button" class="btn btn-default" onclick="changeRate(0.9)">九 折</button>
+      </div>
+    </div>
+    <div class='form-group'>
+      <%= label_tag 'year', '贷款年限', for: 'year', class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= text_field_tag 'year', '30', class: 'form-control', placeholder: '00', pattern: '^([1-9][\d]{0,7}|0)' %>
+      </div>
+    </div>
+    <div class='form-group'>
+      <%= label_tag 'method', '还款方式', for: 'method', class: 'col-md-2 control-label' %>
+      <%= label_tag 'method', '等额本息', for: 'method', class: 'col-md-2 control-label' %>
+      <input type="radio" name="method" class="col-md-3" value="0">
+      <%= label_tag 'method', '等额本金', for: 'method', class: 'col-md-2 control-label' %>
+      <input type="radio" name="method" class="col-md-3" value="1" checked>
+    </div>
+
+    <div class='form-group'>
+      <div class="col-md-2 col-md-offset-9">
+        <%= submit_tag '计算', class: 'btn btn-default' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  function resetRate() {
+    $('#rate').val('4.90');
+  }
+  function changeRate(percent) {
+    var rate = $('#rate').val()*percent;
+    $('#rate').val(rate);
+  }
+</script>
